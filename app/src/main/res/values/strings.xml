@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab work 2</string>
+    <string name="name">Full Name *</string>
+    <string name="age">Age *</string>
+    <string name="gender">Gender *</string>
+    <string name="email">E-mail Address *</string>
+    <string name="description">About Yourself *</string>
+    <string name="start">Continue</string>
+</resources>
