@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "379563471788",
-    "project_id": "mobile-app-development-99d5e",
-    "storage_bucket": "mobile-app-development-99d5e.appspot.com"
+    "project_number": "395580868780",
+    "project_id": "boro-service-provider",
+    "storage_bucket": "boro-service-provider.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:379563471788:android:4738d0f0d297183d0c4009",
+        "mobilesdk_app_id": "1:395580868780:android:c735183496d991d0737709",
         "android_client_info": {
-          "package_name": "com.tees.b1162802.boro"
+          "package_name": "uk.tees.b1162802.boro"
         }
       },
       "oauth_client": [
         {
-          "client_id": "379563471788-cmq08s7u9g3hm0m78876ke2ccuvjs39j.apps.googleusercontent.com",
+          "client_id": "395580868780-upgotv208iv8gnpvumbd22nhkqofrtp9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDIlfIhL-h0LYdnHKy2oqM1rT03HsafKMc"
+          "current_key": "AIzaSyBsorlAVNuxyT49qB8LJjJfaKPW_FF4Mvs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "379563471788-cmq08s7u9g3hm0m78876ke2ccuvjs39j.apps.googleusercontent.com",
+              "client_id": "395580868780-upgotv208iv8gnpvumbd22nhkqofrtp9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

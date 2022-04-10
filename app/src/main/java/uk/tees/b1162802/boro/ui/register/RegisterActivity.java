@@ -83,6 +83,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerBtn = binding.register;
         loadingProgress = binding.loading;
 
+        registerBtn.setOnClickListener(this);
+
         registerViewModel = new ViewModelProvider(this, new RegisterViewModelFactory())
                 .get(RegisterViewModel.class);
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -111,6 +113,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     emailLayout.setError(getString(registerFormState.getEmailError()));
                 }else{
                     emailLayout.setError(null);
+                }
+                if (registerFormState.getPasswordError() != null) {
+                    passwordEditLayout.setError(getString(registerFormState.getPasswordError()));
+                }else{
+                    passwordEditLayout.setError(null);
                 }
                 if (registerFormState.getAgeError() != null) {
                     ageLayout.setError(getString(registerFormState.getAgeError()));
@@ -166,11 +173,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void afterTextChanged(Editable s) {
                 registerViewModel.registerDataChanged(emailLayout.getEditText().getText().toString(),
-                        nameLayout.getEditText().getText().toString(),ageLayout.getEditText().getText().toString(),genderLayout.getEditText().getText().toString(),dateLayout.getEditText().getText().toString());
+                        passwordEditLayout.getEditText().getText().toString(),
+                        nameLayout.getEditText().getText().toString(),
+                        ageLayout.getEditText().getText().toString(),
+                        genderLayout.getEditText().getText().toString(),
+                        dateLayout.getEditText().getText().toString());
             }
         };
         fullnameEditText.addTextChangedListener(afterTextChangedListener);
         emailEditText.addTextChangedListener(afterTextChangedListener);
+        passwordEditText.addTextChangedListener(afterTextChangedListener);
         ageEditText.addTextChangedListener(afterTextChangedListener);
         mDateFormat.addTextChangedListener(afterTextChangedListener);
 
@@ -182,14 +194,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Toast.makeText(getApplicationContext(), model, Toast.LENGTH_LONG).show();
     }
 
-    private void showRegisterFailed(@StringRes Integer errorString) {
+    private void showRegisterFailed(String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login:
+            case R.id.register:
                 loadingProgress.setVisibility(View.VISIBLE);
                 registerBtn.setVisibility(View.INVISIBLE);
                 FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -198,7 +210,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
                     finish();;
                 }
-                mAuth.signInWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
+                mAuth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -206,15 +218,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     // Sign in success, update UI with the signed-in user's information
 //                                    Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUiWithUser(user.toString());
+                                    updateUiWithUser(user.getEmail().toString());
                                 } else {
                                     // If sign in fails, display a message to the user.
 //                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    loadingProgress.setVisibility(View.GONE);
-                                    registerBtn.setVisibility(View.VISIBLE);
-//                                    showRegisterFailed("Login Failed.Could not find user or password");
+
+                                    showRegisterFailed("Could noot register");
 
                                 }
+                                loadingProgress.setVisibility(View.GONE);
+                                registerBtn.setVisibility(View.VISIBLE);
                             }
                         });
 //                loginViewModel.login(usernameEditText.getText().toString(),

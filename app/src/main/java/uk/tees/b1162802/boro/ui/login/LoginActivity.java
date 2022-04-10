@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         passwordLayout = binding.passwordTextField;
         usernameLayout = binding.usernameTextField;
         forgotTextView = binding.forgotView;
-        registerTextView = binding.registerText;
+        registerTextView = binding.registerUser;
         loginButton = (FloatingActionButton) binding.login;
         loginButton.setEnabled(false);
         loadingProgressBar = binding.loading;
@@ -186,7 +186,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent i = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
                 startActivity(i);
                 break;
-            case R.id.registerText:
+            case R.id.registerUser:
                 Intent registerIntent = new Intent(this, RegisterActivity.class);
                 startActivity(registerIntent);
                 break;

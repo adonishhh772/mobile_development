@@ -39,17 +39,19 @@ public class RegisterViewModel extends ViewModel {
         }
     }
 
-    public void registerDataChanged(String username, String name, String age, String gender, String date) {
+    public void registerDataChanged(String username,String password, String name, String age, String gender, String date) {
         if (!isEmailValid(username)) {
-            registerFormState.setValue(new RegisterFormState(R.string.invalid_username, null,null,null,null));
+            registerFormState.setValue(new RegisterFormState(R.string.invalid_username, null,null,null,null,null));
+        }else if (!isPasswordValid(password)) {
+            registerFormState.setValue(new RegisterFormState(null, R.string.invalid_password,null,null,null,null));
         } else if (!isNameValid(name)) {
-            registerFormState.setValue(new RegisterFormState(null, R.string.invalid_name,null,null,null));
+            registerFormState.setValue(new RegisterFormState(null,null, R.string.invalid_name,null,null,null));
         } else if (!isAgeValid(age)) {
-            registerFormState.setValue(new RegisterFormState(null,null,null,R.string.invalid_age,null));
+            registerFormState.setValue(new RegisterFormState(null,null,null,null,R.string.invalid_age,null));
         }else if (!isGenderValid(gender)) {
-            registerFormState.setValue(new RegisterFormState(null,null,R.string.invalid_gender,null,null));
+            registerFormState.setValue(new RegisterFormState(null,null,null,R.string.invalid_gender,null,null));
         }else if (!isDateValid(date)) {
-            registerFormState.setValue(new RegisterFormState(null,null,null,null,R.string.invalid_date));
+            registerFormState.setValue(new RegisterFormState(null,null,null,null,null,R.string.invalid_date));
         } else {
             registerFormState.setValue(new RegisterFormState(true));
         }
@@ -80,6 +82,11 @@ public class RegisterViewModel extends ViewModel {
         } else {
             return false;
         }
+    }
+
+    // A placeholder password validation check
+    private boolean isPasswordValid(String password) {
+        return password != null && password.trim().length() > 5;
     }
 
     // A placeholder name validation check

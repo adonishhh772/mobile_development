@@ -8,6 +8,8 @@ class RegisterFormState {
     @Nullable
     private Integer emailError;
     @Nullable
+    private Integer passwordError;
+    @Nullable
     private Integer nameError;
     @Nullable
     private Integer genderError;
@@ -17,10 +19,11 @@ class RegisterFormState {
     private Integer dateError;
     private boolean isDataValid;
 
-    RegisterFormState(@Nullable Integer emailError, @Nullable Integer nameError,
+    RegisterFormState(@Nullable Integer emailError, @Nullable Integer passwordError, @Nullable Integer nameError,
                       @Nullable Integer genderError, @Nullable Integer ageError,
                       @Nullable Integer dateError) {
         this.emailError = emailError;
+        this.passwordError = passwordError;
         this.nameError = nameError;
         this.genderError = genderError;
         this.ageError = ageError;
@@ -30,6 +33,7 @@ class RegisterFormState {
 
     RegisterFormState(boolean isDataValid) {
         this.emailError = null;
+        this.passwordError = null;
         this.nameError = null;
         this.genderError = null;
         this.ageError = null;
@@ -40,6 +44,11 @@ class RegisterFormState {
     @Nullable
     Integer getEmailError() {
         return emailError;
+    }
+
+    @Nullable
+    Integer getPasswordError() {
+        return passwordError;
     }
 
     @Nullable
