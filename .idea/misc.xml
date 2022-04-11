@@ -10,16 +10,17 @@
         <entry key="app/src/main/res/drawable/night_logo_foreground.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.188" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.45400543212890626" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.40364842069321794" />
-        <entry key="app/src/main/res/layout/forgot_password.xml" value="0.17255434782608695" />
+        <entry key="app/src/main/res/layout/forgot_password.xml" value="0.11827956989247312" />
         <entry key="app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_item_list_dialog_list_dialog_item.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/search_modal_fragment.xml" value="0.24951782226562497" />
         <entry key="app/src/main/res/layout/splash_screen.xml" value="0.24129587809244793" />
+        <entry key="app/src/main/res/layout/toolbar_layout.xml" value="0.10416666666666667" />
       </map>
     </option>
   </component>

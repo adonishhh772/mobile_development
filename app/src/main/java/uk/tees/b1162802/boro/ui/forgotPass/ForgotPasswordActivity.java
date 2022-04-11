@@ -46,6 +46,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+
         forgotPassViewModel = new ViewModelProvider(this, new ForgotPasswordViewModelFactory())
                 .get(ForgotPassViewModel.class);
         emailEditText = binding.email;
