@@ -56,20 +56,26 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                changeRoute();
             }
         }, 5000);
+
+
+
+
+
+
     }
 
     private void changeRoute() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent mainIntent = new Intent(this, MainActivity.class);
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+            Intent mainIntent = new Intent(this, NavigationActivity.class);
             startActivity(mainIntent);
             return;
-        }
-        logo.setAnimation(null);
-        service.setAnimation(null);
-        provider.setAnimation(null);
-        login.setVisibility(View.VISIBLE);
-        register.setVisibility(View.VISIBLE);
+//        }
+//        logo.setAnimation(null);
+//        service.setAnimation(null);
+//        provider.setAnimation(null);
+//        login.setVisibility(View.VISIBLE);
+//        register.setVisibility(View.VISIBLE);
 
     }
 

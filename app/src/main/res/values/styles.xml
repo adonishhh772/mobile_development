@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="ThemeOverlay.AppCompat.navTheme">
+
+        <!-- Color of text and icon when SELECTED -->
+        <item name="colorPrimary">#FFC107</item>
+
+        <!-- Background color when SELECTED -->
+        <item name="colorControlHighlight">#FFC107</item>
+
+    </style>
     <style name="progressBarDefault" parent="@style/Theme.AppCompat">
         <item name="colorAccent">#FFC107</item>
     </style>

@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BoroServiceProvider">
-
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/Theme.BoroServiceProvider.NoActionBar" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -27,7 +31,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBMStu_gyyaySZgZyoH3Xk-rXirVwTMdEA" />
+            android:value="AIzaSyAu63qsym8VNv-4qGwyPjNXP3J_fMJyzJs" />
 
         <receiver
             android:name=".features.BroadCastReceiver"
