@@ -10,10 +10,13 @@
     <string name="prompt_date">Date of Birth</string>
     <string name="prompt_provider">I am a provider</string>
     <string name="prompt_name">Full Name</string>
+    <string name="prompt_number">Mobile</string>
     <string name="prompt_age">Age</string>
     <string name="prompt_gender">Gender</string>
+    <string name="prompt_address">Address</string>
     <string name="prompt_service_provider">Search Providers</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_change_password">Change</string>
     <string name="forgot_login_password">Reset Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -26,7 +29,10 @@
     <string name="invalid_age">Not a valid age</string>
     <string name="invalid_gender">Not a valid gender</string>
     <string name="invalid_date">Not a valid date</string>
+    <string name="invalid_address">Not a valid address</string>
+    <string name="invalid_number">Not a valid UK number</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="register_failed">"Registration failed"</string>
     <string name="forgot">"Forgot Username or password?"</string>
 
     <string-array name="gender_value">
@@ -45,4 +51,9 @@
     <string name="menu_services">My Services</string>
     <string name="menu_favourites">My Favourites</string>
     <string name="menu_settings">Settings</string>
+    <string name="title_activity_profile">My Profile</string>
+    <string name="edit">Edit Profile</string>
+    <string name="update">Update Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

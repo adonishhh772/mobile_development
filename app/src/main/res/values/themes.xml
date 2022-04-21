@@ -22,4 +22,5 @@
     <style name="Theme.BoroServiceProvider.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.BoroServiceProvider.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

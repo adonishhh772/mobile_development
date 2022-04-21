@@ -113,6 +113,46 @@
                     tools:layout_editor_absoluteY="428dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneTextField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="384dp"
+                android:layout_height="78dp"
+                android:layout_marginStart="10dp"
+                android:hint="@string/prompt_number"
+                app:boxStrokeColor="#FFC107"
+                app:errorEnabled="true"
+                app:hintTextColor="#120E0E">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone"
+                    android:layout_width="369dp"
+                    android:layout_height="64dp"
+                    android:inputType="phone"
+                    android:selectAllOnFocus="true"
+                    tools:layout_editor_absoluteX="24dp"
+                    tools:layout_editor_absoluteY="428dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addressTextField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="384dp"
+                android:layout_height="78dp"
+                android:layout_marginStart="10dp"
+                android:hint="@string/prompt_address"
+                app:boxStrokeColor="#FFC107"
+                app:errorEnabled="true"
+                app:hintTextColor="#120E0E">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/address"
+                    android:layout_width="369dp"
+                    android:layout_height="64dp"
+                    android:inputType="text"
+                    android:selectAllOnFocus="true"
+                    tools:layout_editor_absoluteX="24dp"
+                    tools:layout_editor_absoluteY="428dp" />
+            </com.google.android.material.textfield.TextInputLayout>
             <RelativeLayout
                 android:layout_width="395dp"
                 android:layout_height="match_parent">
@@ -191,6 +231,7 @@
             <CheckBox
                 style="@style/Widget.App.CheckBox"
                 android:layout_width="match_parent"
+                android:id="@+id/isProvider"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"

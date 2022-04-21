@@ -13,7 +13,13 @@
     <style name="progressBarDefault" parent="@style/Theme.AppCompat">
         <item name="colorAccent">#FFC107</item>
     </style>
+    <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
 
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorSecondary">#FFC107</item>
+    </style>
     <style name="Widget.App.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>
     </style>

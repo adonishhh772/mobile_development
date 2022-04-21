@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -151,8 +152,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        finish();
     }
 
-    private void showLoginFailed(String errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private void showLoginFailed(View view,String errorString) {
+        Snackbar.make(view,
+                errorString,
+                Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 
     @Override
@@ -175,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                     loadingProgressBar.setVisibility(View.GONE);
                                     loginButton.setVisibility(View.VISIBLE);
-                                    showLoginFailed("Login Failed.Could not find user or password");
+                                    showLoginFailed(v,"Login Failed.Could not find user or password");
 
                                 }
                             }

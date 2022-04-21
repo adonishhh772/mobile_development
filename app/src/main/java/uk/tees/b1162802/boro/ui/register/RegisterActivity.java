@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,21 +33,26 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import uk.tees.b1162802.boro.ui.login.LoginActivity;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import uk.tees.b1162802.boro.R;
 import uk.tees.b1162802.boro.databinding.ActivityRegisterBinding;
-import uk.tees.b1162802.boro.ui.login.LoginActivity;
+
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private RegisterViewModel registerViewModel;
     private ActivityRegisterBinding binding;
     DatePickerDialog.OnDateSetListener onDateSetListener;
-    TextInputEditText emailEditText,ageEditText,fullnameEditText,mDateFormat,passwordEditText;
-    TextInputLayout nameLayout,emailLayout,ageLayout,genderLayout,dateLayout,passwordEditLayout;
+    TextInputEditText emailEditText,ageEditText,fullnameEditText,mDateFormat,passwordEditText,addressEditText,mobileEditText;
+    TextInputLayout nameLayout,emailLayout,ageLayout,genderLayout,dateLayout,passwordEditLayout, addressEditLayout,mobileEditLayout;
     TextView loginTextView;
+    CheckBox provider;
     FloatingActionButton registerBtn;
     ProgressBar loadingProgress;
     private FirebaseAuth mAuth;
@@ -71,7 +77,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mDateFormat = binding.datepicker;
         mDateFormat.setOnClickListener(this);
         emailEditText = binding.username;
+        addressEditText = binding.address;
+        addressEditLayout = binding.addressTextField;
         ageEditText = binding.age;
+        mobileEditText = binding.phone;
+        mobileEditLayout = binding.phoneTextField;
         passwordEditText = binding.password;
         passwordEditLayout = binding.passwordTextField;
         fullnameEditText = binding.fullname;
@@ -82,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dateLayout = binding.dateTextField;
         registerBtn = binding.register;
         loadingProgress = binding.loading;
-
+        provider = binding.isProvider;
         registerBtn.setOnClickListener(this);
 
         registerViewModel = new ViewModelProvider(this, new RegisterViewModelFactory())
@@ -119,6 +129,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }else{
                     passwordEditLayout.setError(null);
                 }
+
+                if (registerFormState.getAddressError() != null) {
+                    addressEditLayout.setError(getString(registerFormState.getAddressError()));
+                }else{
+                    addressEditLayout.setError(null);
+                }
+
+                if (registerFormState.getMobileError() != null) {
+                    mobileEditLayout.setError(getString(registerFormState.getMobileError()));
+                }else{
+                    mobileEditLayout.setError(null);
+                }
                 if (registerFormState.getAgeError() != null) {
                     ageLayout.setError(getString(registerFormState.getAgeError()));
                 }else{
@@ -139,25 +161,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-//        registerViewModel.getRegisterResult().observe(this, new Observer<RegisterResult>() {
-//            @Override
-//            public void onChanged(@Nullable RegisterResult registerResult) {
-//                if (registerResult == null) {
-//                    return;
-//                }
-//                loadingProgress.setVisibility(View.GONE);
-//                if (registerResult.getError() != null) {
-//                    showRegisterFailed(registerResult.getError());
-//                }
-//                if (registerResult.getSuccess() != null) {
-//                    updateUiWithUser(registerResult.getSuccess());
-//                }
-//                setResult(Activity.RESULT_OK);
-//
-//                //Complete and destroy login activity once successful
-//                finish();
-//            }
-//        });
+        registerViewModel.getRegisterResult().observe(this, new Observer<RegisterResult>() {
+            @Override
+            public void onChanged(@Nullable RegisterResult registerResult) {
+                if (registerResult == null) {
+                    return;
+                }
+                loadingProgress.setVisibility(View.GONE);
+                if (registerResult.getError() != null) {
+                    showRegisterFailed(registerResult.gsetError());
+                }
+                if (registerResult.getSuccess() != null) {
+                    updateUiWithUser(registerResult.getSuccess());
+                }
+                setResult(Activity.RESULT_OK);
+
+                //Complete and destroy login activity once successful
+                finish();
+            }
+        });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -177,14 +199,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         nameLayout.getEditText().getText().toString(),
                         ageLayout.getEditText().getText().toString(),
                         genderLayout.getEditText().getText().toString(),
-                        dateLayout.getEditText().getText().toString());
+                        dateLayout.getEditText().getText().toString(),
+                        addressEditLayout.getEditText().getText().toString(),
+                        mobileEditLayout.getEditText().getText().toString());
             }
         };
         fullnameEditText.addTextChangedListener(afterTextChangedListener);
         emailEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
+        addressEditText.addTextChangedListener(afterTextChangedListener);
+        mobileEditText.addTextChangedListener(afterTextChangedListener);
         ageEditText.addTextChangedListener(afterTextChangedListener);
         mDateFormat.addTextChangedListener(afterTextChangedListener);
+
 
     }
 
@@ -208,7 +235,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(currentUser != null){
                     String welcome = "Already logged in";
                     Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-                    finish();;
+                    finish();
                 }
                 mAuth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -218,12 +245,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     // Sign in success, update UI with the signed-in user's information
 //                                    Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUiWithUser(user.getEmail().toString());
+                                    Map<String,String> register = new HashMap<>();
+                                    register.put("username", emailEditText.getText().toString());
+                                    register.put("fullname", fullnameEditText.getText().toString());
+                                    register.put("password", passwordEditText.getText().toString());
+                                    register.put("mobile", mobileEditText.getText().toString());
+                                    register.put("address", addressEditText.getText().toString());
+                                    register.put("age", ageEditText.getText().toString());
+                                    register.put("gender", binding.gender.getText().toString());
+                                    register.put("birthday", mDateFormat.getText().toString());
+                                    if(provider.isChecked()){
+                                        register.put("isProvider","true");
+                                    }else{
+                                        register.put("isProvider","false");
+                                    }
+
+                                    registerViewModel.register(register);
+//                                    updateUiWithUser(user.getEmail());
                                 } else {
                                     // If sign in fails, display a message to the user.
 //                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
-                                    showRegisterFailed("Could noot register");
+                                    showRegisterFailed("Could not register");
 
                                 }
                                 loadingProgress.setVisibility(View.GONE);

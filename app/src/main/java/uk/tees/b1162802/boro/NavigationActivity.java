@@ -1,13 +1,18 @@
 package uk.tees.b1162802.boro;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,6 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import uk.tees.b1162802.boro.databinding.ActivityNavigationBinding;
+import uk.tees.b1162802.boro.features.BroadCastReceiver;
 
 public class NavigationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,9 +38,26 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     NavigationView navigationView;
     TextView viewProfile;
     boolean isChildFragment = false;
+    private BroadCastReceiver registerReceiver = new BroadCastReceiver(){
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if(intent.getBooleanExtra("state",false)){
+                Toast.makeText(context,"Airplane Mode ON", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(context,"Airplane Mode OFF", Toast.LENGTH_LONG).show();
+            }
+            //super.onReceive(context, intent);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ///broadcast intent filter
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(registerReceiver, intentFilter);
 
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -84,11 +107,15 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                 }else{
                     Intent intent = new Intent(this, NavigationActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 }
                 break;
             case R.id.showProfile:
-            Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(this,ProfileActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//            Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
                 break;
         }
     }

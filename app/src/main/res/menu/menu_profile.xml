@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="uk.tees.b1162802.boro.ProfileActivity">
+    <item
+        android:id="@+id/action_update"
+        android:orderInCategory="100"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_edit"/>
+</menu>

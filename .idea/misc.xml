@@ -14,36 +14,45 @@
         <entry key="app/src/main/res/drawable/no_data_found_background.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/services.xml" value="0.127" />
+        <entry key="app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.1" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.15172101449275363" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_profile_edit.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="app/src/main/res/layout/app_bar_navigation.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/layout/completed_services.xml" value="0.18696036960767667" />
         <entry key="app/src/main/res/layout/content_navigation.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/layout/content_navigation2.xml" value="0.11614583333333334" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.44382476806640625" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.40364842069321794" />
         <entry key="app/src/main/res/layout/forgot_password.xml" value="0.11827956989247312" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/fragment_favourites.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_item_list_dialog_list_dialog_item.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_services.xml" value="0.19157894736842104" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout/nav_header_navigation.xml" value="0.11458333333333333" />
-        <entry key="app/src/main/res/layout/search_modal_fragment.xml" value="0.24951782226562497" />
+        <entry key="app/src/main/res/layout/search_modal_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/setting_list_group.xml" value="0.39332784016927086" />
-        <entry key="app/src/main/res/layout/setting_list_item.xml" value="0.24812367757161458" />
+        <entry key="app/src/main/res/layout/setting_list_item.xml" value="0.23852386474609377" />
         <entry key="app/src/main/res/layout/splash_screen.xml" value="0.24129587809244793" />
         <entry key="app/src/main/res/layout/toolbar_layout.xml" value="0.10416666666666667" />
         <entry key="app/src/main/res/layout/upcoming_services.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.2515625" />
+        <entry key="app/src/main/res/menu/menu_profile.xml" value="0.24523773193359377" />
         <entry key="app/src/main/res/menu/navigation.xml" value="0.2515625" />
         <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.2515625" />
+        <entry key="app/src/main/res/menu/profile_menu.xml" value="0.10233306884765625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/no_data_found.xml" value="0.1965" />
       </map>
     </option>

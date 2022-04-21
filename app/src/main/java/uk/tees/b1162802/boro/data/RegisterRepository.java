@@ -1,11 +1,15 @@
 package uk.tees.b1162802.boro.data;
 
+
+import java.util.Map;
+
 import uk.tees.b1162802.boro.data.model.LoggedInUser;
 
 public class RegisterRepository {
     private static volatile RegisterRepository instance;
 
     private RegisterDataSource dataSource;
+    private LoggedInUser user = null;
 
     // private constructor : singleton access
     private RegisterRepository(RegisterDataSource dataSource) {
@@ -20,12 +24,18 @@ public class RegisterRepository {
     }
 
 
-    public Result<String> register(String username) {
+    public Result<LoggedInUser> register(Map<String,String> registerData) {
         // handle register
-        Result<String> result = dataSource.register(username);
+        Result<LoggedInUser> result = dataSource.register(registerData);
         if (result instanceof Result.Success) {
-//            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+            setRegisteredUser(((Result.Success<LoggedInUser>) result).getData());
         }
         return result;
+    }
+
+    private void setRegisteredUser(LoggedInUser data) {
+        this.user = data;
+        // If user credentials will be cached in local storage, it is recommended it be encrypted
+        // @see https://developer.android.com/training/articles/keystore
     }
 }

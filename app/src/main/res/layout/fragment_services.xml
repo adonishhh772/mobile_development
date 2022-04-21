@@ -23,10 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?actionBarSize"
-            app:tabBackground="@color/white"
             app:tabGravity="fill"
             app:tabSelectedTextColor="#FFC107"
-            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorColor="#FFC107"
             app:tabIndicatorHeight="4dp"
             app:tabMode="fixed">
 

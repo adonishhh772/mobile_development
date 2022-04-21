@@ -5,14 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/searchListitemText"
-        android:layout_width="wrap_content"
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/enableDisableButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="18dp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="sans-serif-smallcaps"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Switch"
+        style="@style/Widget.App.Switch"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
