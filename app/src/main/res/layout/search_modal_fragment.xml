@@ -20,17 +20,15 @@
             android:id="@+id/iconGreeting"
             android:layout_width="86dp"
             android:layout_height="61dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="292dp"
+            android:layout_alignParentEnd="false"
             android:src="@drawable/night_logo_foreground" />
 
         <TextView
             android:id="@+id/greetings"
-            android:layout_width="214dp"
+            android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="92dp"
+            android:layout_marginEnd="130dp"
             android:fontFamily="sans-serif-smallcaps"
             android:paddingTop="12dp"
             android:text="TextView"

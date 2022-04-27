@@ -28,4 +28,9 @@
         android:name="uk.tees.b1162802.boro.ui.settings.SettingFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_terms"
+        android:name="uk.tees.b1162802.boro.ui.terms.TermsFragment"
+        android:label="@string/menu_terms"
+        tools:layout="@layout/fragment_terms" />
 </navigation>

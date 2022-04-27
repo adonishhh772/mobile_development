@@ -43,8 +43,6 @@ public class SettingFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SettingViewModel settingViewModel =
-                new ViewModelProvider(this).get(SettingViewModel.class);
         sharedPreferences = getContext().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

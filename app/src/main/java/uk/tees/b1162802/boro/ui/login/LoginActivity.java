@@ -7,7 +7,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -16,12 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,18 +32,31 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import uk.tees.b1162802.boro.NavigationActivity;
 import uk.tees.b1162802.boro.R;
+import uk.tees.b1162802.boro.data.model.LoggedInUser;
 import uk.tees.b1162802.boro.ui.forgotPass.ForgotPasswordActivity;
 import uk.tees.b1162802.boro.ui.login.LoginViewModel;
 import uk.tees.b1162802.boro.ui.login.LoginViewModelFactory;
 import uk.tees.b1162802.boro.databinding.ActivityLoginBinding;
 import uk.tees.b1162802.boro.ui.register.RegisterActivity;
 
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    String userID;
     private FirebaseAuth mAuth;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "settingpref";
     TextInputEditText usernameEditText,passwordEditText;
     TextInputLayout passwordLayout,usernameLayout;
     TextView forgotTextView,registerTextView;
@@ -65,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -100,25 +110,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-//        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-//            @Override
-//            public void onChanged(@Nullable LoginResult loginResult) {
-//                if (loginResult == null) {
-//                    return;
-//                }
-//                loadingProgressBar.setVisibility(View.GONE);
-//                if (loginResult.getError() != null) {
-//                    showLoginFailed(loginResult.getError());
-//                }
-//                if (loginResult.getSuccess() != null) {
-//                    updateUiWithUser(loginResult.getSuccess());
-//                }
-//                setResult(Activity.RESULT_OK);
-//
-//                //Complete and destroy login activity once successful
-//                finish();
-//            }
-//        });
+        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
+            @Override
+            public void onChanged(@Nullable LoginResult loginResult) {
+                if (loginResult == null) {
+                    return;
+                }
+                loadingProgressBar.setVisibility(View.GONE);
+                if (loginResult.getError() != null) {
+                    showLoggedFailed(loginResult.getError());
+                }
+                if (loginResult.getSuccess() != null) {
+                    getUserDetails();
+                    updateUiWithUser(loginResult.getSuccess());
+                }
+                setResult(Activity.RESULT_OK);
+
+                //Complete and destroy login activity once successful
+                finish();
+            }
+        });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -144,13 +155,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registerTextView.setOnClickListener(this);
     }
 
-    private void updateUiWithUser(String model) {
-        String welcome = getString(R.string.welcome) + model.toString();
-        // TODO : initiate successful logged in experience
-//        Intent i = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
-//        startActivity(i);
-//        finish();
+    private void getUserDetails() {
+        final Query checkUser = reference.orderByChild("username").equalTo(usernameLayout.getEditText().getText().toString());
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String passwordFromDB = snapshot.child(userID).child("password").getValue(String.class);
+                    if(passwordFromDB.equals(passwordLayout.getEditText().getText().toString())){
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", snapshot.child(userID).child("fullname").getValue(String.class));
+                        editor.apply();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    private void updateUiWithUser(LoggedInUserView model) {
+        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", model.getDisplayName());
+        editor.putBoolean("isLogged", true);
+        editor.apply();
+        // TODO : initiate successful logged in experience
+        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Intent mainIntent = new Intent(this, NavigationActivity.class);
+        startActivity(mainIntent);
+    }
+
+    private void showLoggedFailed(@StringRes Integer errorString) {
+        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
 
     private void showLoginFailed(View view,String errorString) {
         Snackbar.make(view,
@@ -173,7 +216,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     // Sign in success, update UI with the signed-in user's information
 //                                    Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUiWithUser(user.toString());
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    userID = user.getUid();
+                                    editor.putString("userID", user.getUid());
+                                    editor.apply();
+                                    loginViewModel.login(user.getUid(),usernameEditText.getText().toString(),
+                                            passwordEditText.getText().toString());
+//                                    updateUiWithUser(user.toString());
                                 } else {
                                     // If sign in fails, display a message to the user.
 //                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -184,8 +233,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                             }
                         });
-//                loginViewModel.login(usernameEditText.getText().toString(),
-//                        passwordEditText.getText().toString());
+
                 break;
             case R.id.forgotView:
                 Intent i = new Intent(getApplicationContext(), ForgotPasswordActivity.class);

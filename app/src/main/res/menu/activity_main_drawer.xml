@@ -22,5 +22,10 @@
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="@string/menu_settings" />
+
+        <item
+            android:id="@+id/nav_terms"
+            android:icon="@drawable/ic_baseline_article_24"
+            android:title="@string/menu_terms" />
     </group>
 </menu>

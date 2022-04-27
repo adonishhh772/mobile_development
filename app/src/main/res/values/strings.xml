@@ -7,6 +7,8 @@
     <string name="register_name">Register</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
+    <string name="not_allowed">N/A</string>
+    <string name="update_password_title">Update Password</string>
     <string name="prompt_date">Date of Birth</string>
     <string name="prompt_provider">I am a provider</string>
     <string name="prompt_name">Full Name</string>
@@ -16,6 +18,9 @@
     <string name="prompt_address">Address</string>
     <string name="prompt_service_provider">Search Providers</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_old_password">Old Password</string>
+    <string name="prompt_new_password">New Password</string>
+    <string name="prompt_re_password">Confirm Password</string>
     <string name="prompt_change_password">Change</string>
     <string name="forgot_login_password">Reset Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -25,6 +30,7 @@
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid email</string>
     <string name="invalid_password">Password must be >5 characters</string>
+    <string name="retype_invalid">Password does not match</string>
     <string name="invalid_name">Not a valid name</string>
     <string name="invalid_age">Not a valid age</string>
     <string name="invalid_gender">Not a valid gender</string>
@@ -32,6 +38,8 @@
     <string name="invalid_address">Not a valid address</string>
     <string name="invalid_number">Not a valid UK number</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="update_pass_fail">"Could not update password"</string>
+    <string name="update_success">"Password Updated Successfully"</string>
     <string name="register_failed">"Registration failed"</string>
     <string name="forgot">"Forgot Username or password?"</string>
 
@@ -51,9 +59,21 @@
     <string name="menu_services">My Services</string>
     <string name="menu_favourites">My Favourites</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_terms">Terms and condition</string>
     <string name="title_activity_profile">My Profile</string>
     <string name="edit">Edit Profile</string>
     <string name="update">Update Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="terms_condition">TERMS AND CONDITIONS</string>
+    <string name="sub_header_terms">PLEASE REVIEW OUR TERMS OF USE AND PRIVACY POLICY CAREFULLY BEFORE DOWNLOADING OUR APPLICATION OR USING OUR SERVICE FOR THE FIRST TIME.</string>
+    <string name="intro_terms">
+        <b>-</b> These Terms of Use <b>(\"Terms\")</b> describe the terms and conditions upon which Clients <b>(\"You\" or “Your” or “Yourself” or “User\")</b> access and use the Application (defined herein).
+        \n\n\n <b>-</b> These Terms govern the basis upon which <b>Boro Service Provider</b> (\"Boro Service Provider” or the “Company\") will allow you to access or use its Application, to connect with a third-party Partner who will provide you Mobility Services within the Territory.
+        \n\n\n <b>-</b> Your access to and use of the Application is subject to these Terms and applicable policies, as may be modified or updated by <b>Boro Service Provider</b> from time to time, and effective upon posting of updated Terms or/and applicable policies.
+        \n\n\n <b>-</b> Continued use of our Services after modification and update shall constitute your consent to such changes or modifications.
+        \n\n\n <b>-</b> These Terms expressly supersede prior agreements with you. <b>Boro Service Provider</b> may immediately terminate these Terms or any portion therein at any time without cause.
+        \n\n\n <b>-</b> Please ensure that you read and understand all of these Terms carefully before you use the Application or request our Mobility Services.
+        \n\n\n <b>-</b> By using or accessing the Application, you agree to be bound by these Terms. Your agreement to these Terms shall operate as a binding and legally enforceable agreement between you and <b>Boro Service Provider</b> in respects to the features on the Application and in relation to <b>Boro Service Provider</b>.
+        \n\n\n <b>-</b> If you do not agree with these Terms, do not use this Application or Mobility Services.
+        \n\n\n <b>-</b> You acknowledge and agree that <b>Boro Service Provider</b> is a technology service provider which acts as an intermediary between you and the Partner who provides Mobility Services as distinct from transportation services. Upon your execution (electronic or otherwise) of these Terms, you and <b>Boro Service Provider</b> shall be bound by details set forth herein.
+        \n\n\n <b>-</b> <b>Boro Service Provider</b> and You shall be individually referred to as <b>“Party”</b> and collectively as <b>“Parties”.</b></string>
 </resources>

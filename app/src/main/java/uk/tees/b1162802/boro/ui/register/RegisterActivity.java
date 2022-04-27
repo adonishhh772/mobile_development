@@ -3,12 +3,15 @@ package uk.tees.b1162802.boro.ui.register;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -33,6 +36,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import uk.tees.b1162802.boro.NavigationActivity;
 import uk.tees.b1162802.boro.ui.login.LoginActivity;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -47,6 +52,8 @@ import uk.tees.b1162802.boro.databinding.ActivityRegisterBinding;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private RegisterViewModel registerViewModel;
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "settingpref";
     private ActivityRegisterBinding binding;
     DatePickerDialog.OnDateSetListener onDateSetListener;
     TextInputEditText emailEditText,ageEditText,fullnameEditText,mDateFormat,passwordEditText,addressEditText,mobileEditText;
@@ -64,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(binding.getRoot());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         // ...
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -130,16 +137,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     passwordEditLayout.setError(null);
                 }
 
-                if (registerFormState.getAddressError() != null) {
-                    addressEditLayout.setError(getString(registerFormState.getAddressError()));
-                }else{
-                    addressEditLayout.setError(null);
-                }
-
                 if (registerFormState.getMobileError() != null) {
                     mobileEditLayout.setError(getString(registerFormState.getMobileError()));
                 }else{
                     mobileEditLayout.setError(null);
+                }
+                if (registerFormState.getAddressError() != null) {
+                    addressEditLayout.setError(getString(registerFormState.getAddressError()));
+                }else{
+                    addressEditLayout.setError(null);
                 }
                 if (registerFormState.getAgeError() != null) {
                     ageLayout.setError(getString(registerFormState.getAgeError()));
@@ -169,9 +175,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 loadingProgress.setVisibility(View.GONE);
                 if (registerResult.getError() != null) {
-                    showRegisterFailed(registerResult.gsetError());
+                    showRegisterFailed(registerResult.getError());
                 }
                 if (registerResult.getSuccess() != null) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("email", emailLayout.getEditText().getText().toString());
+                    editor.putString("username", nameLayout.getEditText().getText().toString());
+                    editor.putBoolean("isLogged", true);
+                    editor.apply();
                     updateUiWithUser(registerResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
@@ -215,13 +226,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void updateUiWithUser(String model) {
-        String welcome = getString(R.string.welcome);
+    private void updateUiWithUser(RegisterUserView model) {
+        String welcome = getString(R.string.welcome) + model.getDisplayName();;
         // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), model, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Intent mainIntent = new Intent(this, NavigationActivity.class);
+        startActivity(mainIntent);
     }
 
-    private void showRegisterFailed(String errorString) {
+    private void showRegisterFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
@@ -236,6 +249,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     String welcome = "Already logged in";
                     Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
                     finish();
+                    return;
                 }
                 mAuth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -243,7 +257,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-//                                    Log.d(TAG, "createUserWithEmail:success");
+                                    Log.i("TAG", "createUserWithEmail:success"+task);
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Map<String,String> register = new HashMap<>();
                                     register.put("username", emailEditText.getText().toString());
@@ -259,14 +273,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     }else{
                                         register.put("isProvider","false");
                                     }
-
-                                    registerViewModel.register(register);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("userID", user.getUid());
+                                    editor.apply();
+                                    registerViewModel.register(user.getUid(),register);
 //                                    updateUiWithUser(user.getEmail());
                                 } else {
                                     // If sign in fails, display a message to the user.
 //                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
-                                    showRegisterFailed("Could not register");
+                                    showRegistrationFailed("Could not register");
 
                                 }
                                 loadingProgress.setVisibility(View.GONE);
@@ -295,5 +311,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             default:
                 break;
         }
+    }
+
+    private void showRegistrationFailed(String failed) {
+        Toast.makeText(getApplicationContext(), failed, Toast.LENGTH_SHORT).show();
     }
 }

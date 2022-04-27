@@ -60,7 +60,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
                             android:fontFamily="sans-serif-smallcaps"
-                            android:text="@string/prompt_email"
+                            android:text="@string/not_allowed"
                             android:textSize="22sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -94,7 +94,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
                             android:fontFamily="sans-serif-smallcaps"
-                            android:text="@string/prompt_email"
+                            android:text="@string/not_allowed"
                             android:textSize="22sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -128,7 +128,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
                             android:fontFamily="sans-serif-smallcaps"
-                            android:text="@string/prompt_address"
+                            android:text="@string/not_allowed"
                             android:textSize="22sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -163,7 +163,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
                             android:fontFamily="sans-serif-smallcaps"
-                            android:text="@string/prompt_email"
+                            android:text="@string/not_allowed"
                             android:textSize="22sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -195,7 +195,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:fontFamily="sans-serif-smallcaps"
-                            android:text="@string/prompt_email"
+                            android:text="@string/not_allowed"
                             android:layout_marginStart="25dp"
                             android:textSize="22sp"
                             android:textStyle="bold" />
@@ -227,7 +227,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:fontFamily="sans-serif-smallcaps"
-                            android:text="@string/prompt_email"
+                            android:text="@string/not_allowed"
                             android:layout_marginStart="25dp"
                             android:textSize="22sp"
                             android:textStyle="bold" />
@@ -280,12 +280,14 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
                             android:fontFamily="sans-serif-smallcaps"
-                            android:text="@string/prompt_email"
-                            android:textSize="22sp"
+                            android:text="@string/not_allowed"
+                            android:inputType="textPassword"
+                            android:textSize="26sp"
                             android:textStyle="bold" />
 
                         <com.google.android.material.button.MaterialButton
                             android:layout_width="wrap_content"
+                            android:id="@+id/updatePassword"
                             android:layout_height="32dp"
                             android:layout_alignParentEnd="true"
                             android:background="?attr/colorPrimaryVariant"
@@ -447,7 +449,7 @@
                             android:id="@+id/editGender"
                             android:layout_width="212dp"
                             android:layout_height="64dp"
-                            android:inputType="none"
+                            android:inputType="text"
                             android:textColor="@color/black" />
 
                     </com.google.android.material.textfield.TextInputLayout>

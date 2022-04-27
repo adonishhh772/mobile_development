@@ -104,7 +104,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
                changeRoute();
             }
-        }, 5000);
+        }, 3000);
 
 
 
@@ -129,7 +129,8 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
     private void changeRoute() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLogged",false);
+        if(currentUser != null && isLoggedIn){
             Intent mainIntent = new Intent(this, NavigationActivity.class);
             startActivity(mainIntent);
             return;

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -141,6 +142,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 }
 
                 if (buttonView.getText() == "Connect to a Bluetooth Device") {
+                    boolean bluetoothResult = ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED;
+                    boolean bluetoothAdminResult = ContextCompat.checkSelfPermission(context,Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED;
+
+                    if(!bluetoothResult && !bluetoothAdminResult){
+                        ActivityCompat.requestPermissions((Activity) context,new String[] {Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN},100);
+                    }
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
                     if (bluetoothAdapter == null) {
                         Toast.makeText(context, "This device doesn't support Bluetooth", Toast.LENGTH_LONG).show();

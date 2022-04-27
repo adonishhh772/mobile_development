@@ -16,13 +16,21 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
-           android:background="?attr/colorPrimaryVariant"
+            android:background="?attr/colorPrimaryVariant"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimaryVariant"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
+            <ImageView
+                android:src="@mipmap/boro_logo_foreground"
+                android:id="@+id/profilePic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -31,6 +39,8 @@
                 android:background="?attr/colorPrimaryVariant"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/Theme.BoroServiceProvider.PopupOverlay" />
+
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

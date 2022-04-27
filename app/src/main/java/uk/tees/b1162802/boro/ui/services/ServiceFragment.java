@@ -24,8 +24,6 @@ public class ServiceFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ServiceViewModel serviceViewModel =
-                new ViewModelProvider(this).get(ServiceViewModel.class);
 
         binding = FragmentServicesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

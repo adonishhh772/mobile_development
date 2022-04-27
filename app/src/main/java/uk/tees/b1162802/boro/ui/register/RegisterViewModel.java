@@ -31,9 +31,9 @@ public class RegisterViewModel extends ViewModel {
         return registerResult;
     }
 
-    public void register(Map<String,String> _data) {
+    public void register(String uid,Map<String,String> _data) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = registerRepository.register(_data);
+        Result<LoggedInUser> result = registerRepository.register(uid,_data);
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
@@ -50,10 +50,10 @@ public class RegisterViewModel extends ViewModel {
             registerFormState.setValue(new RegisterFormState(null, R.string.invalid_password,null,null,null,null,null,null));
         } else if (!isNameValid(name)) {
             registerFormState.setValue(new RegisterFormState(null,null, R.string.invalid_name,null,null,null,null,null));
-        } else if (!isAddressValid(address)) {
-            registerFormState.setValue(new RegisterFormState(null,null,null,null,null,R.string.invalid_address,null,null));
         }else if (!isMobileValid(phone)) {
             registerFormState.setValue(new RegisterFormState(null,null,null,null,null,null,null,R.string.invalid_number));
+        } else if (!isAddressValid(address)) {
+            registerFormState.setValue(new RegisterFormState(null,null,null,null,null,R.string.invalid_address,null,null));
         }else if (!isAgeValid(age)) {
             registerFormState.setValue(new RegisterFormState(null,null,null,null,R.string.invalid_age,null,null,null));
         }else if (!isGenderValid(gender)) {

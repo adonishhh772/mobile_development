@@ -70,13 +70,12 @@ class RegisterFormState {
     }
 
     @Nullable
-    Integer getAddressError() {
-        return addressError;
-    }
-
-    @Nullable
     Integer getMobileError() {
         return mobileError;
+    }
+    @Nullable
+    Integer getAddressError() {
+        return addressError;
     }
 
     @Nullable

@@ -1,6 +1,7 @@
 package uk.tees.b1162802.boro.data;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,21 +27,20 @@ public class RegisterDataSource {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference root = db.getReference().child("Users");
 
-    public Result<LoggedInUser> register(Map<String, String> register) {
+    public Result<LoggedInUser> register(String uid,Map<String, String> registerDetail) {
         try {
-            String phone = register.get("mobile");
-            root.child(phone).setValue(register);
+            root.child(uid).setValue(registerDetail);
             LoggedInUser user =
                     new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(),
-                            register.get("username"),
-                            register.get("password"),
-                            register.get("mobile"),
-                            register.get("birthday"),
-                            register.get("gender"),
-                            register.get("isProvider") == "true" ? true : false,
-                            register.get("age"),
-                            register.get("fullname"));
+                            uid,
+                            registerDetail.get("username"),
+                            registerDetail.get("password"),
+                            registerDetail.get("mobile"),
+                            registerDetail.get("birthday"),
+                            registerDetail.get("gender"),
+                            registerDetail.get("isProvider") == "true" ? true : false,
+                            registerDetail.get("age"),
+                            registerDetail.get("fullname"));
             return new Result.Success<>(user);
         } catch (Exception e) {
             return new Result.Error(new IOException("Error Registering", e));

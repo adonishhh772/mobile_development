@@ -24,9 +24,9 @@ public class RegisterRepository {
     }
 
 
-    public Result<LoggedInUser> register(Map<String,String> registerData) {
+    public Result<LoggedInUser> register(String uid,Map<String,String> registerData) {
         // handle register
-        Result<LoggedInUser> result = dataSource.register(registerData);
+        Result<LoggedInUser> result = dataSource.register(uid,registerData);
         if (result instanceof Result.Success) {
             setRegisteredUser(((Result.Success<LoggedInUser>) result).getData());
         }

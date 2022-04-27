@@ -3,22 +3,26 @@ package uk.tees.b1162802.boro;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Menu;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -27,6 +31,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.io.IOException;
+
 import uk.tees.b1162802.boro.databinding.ActivityNavigationBinding;
 import uk.tees.b1162802.boro.features.BroadCastReceiver;
 
@@ -34,9 +41,15 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavigationBinding binding;
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "settingpref";
     DrawerLayout drawer;
+    FirebaseStorage storage;
+    String userID;
+    StorageReference storageReference;
     NavigationView navigationView;
-    TextView viewProfile;
+    TextView viewProfile, showUsername;
+    ImageView profilePicView;
     boolean isChildFragment = false;
     private BroadCastReceiver registerReceiver = new BroadCastReceiver(){
         @Override
@@ -58,19 +71,26 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         registerReceiver(registerReceiver, intentFilter);
-
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("email","Boro Service Provider");
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        userID = sharedPreferences.getString("userID","Boro Service Provider");
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         drawer = binding.drawerLayout;
         navigationView = binding.navView;
         viewProfile = binding.navView.getHeaderView(0).findViewById(R.id.showProfile);
+        showUsername = binding.navView.getHeaderView(0).findViewById(R.id.showUsername);
+        profilePicView = binding.navView.getHeaderView(0).findViewById(R.id.showImage);
+        getProfileImage();
         binding.appBarNavigation.fab.setOnClickListener(this);
         viewProfile.setOnClickListener(this);
-
+        showUsername.setText(username);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_service, R.id.nav_favourites, R.id.nav_setting)
+                R.id.nav_service, R.id.nav_favourites, R.id.nav_setting, R.id.nav_terms)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigation);
@@ -81,13 +101,35 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                     isChildFragment = true;
                     binding.appBarNavigation.fab.setImageResource(R.drawable.ic_baseline_close_24);
                 }
-
-//                Log.i("TAG", "onDestinationChanged: "+navDestination.getLabel());
-//
             }
         } );
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+
+    private void getProfileImage() {
+        try{
+            final File localFile = File.createTempFile(userID+"_profile_pic","");
+            storageReference.child("images/"+userID+"_profile_pic").getFile(localFile).addOnSuccessListener(
+                    new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                            updateUiWithUser("Retrieved",false);
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            profilePicView.setImageBitmap(bitmap);
+                        }
+                    }
+            ).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    showUpdateFailed(e.getMessage());
+                }
+            });
+        }catch (IOException e){
+            showUpdateFailed(e.getMessage());
+        }
+
     }
 
     @Override
@@ -118,5 +160,10 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 //                        .setAction("Action", null).show();
                 break;
         }
+    }
+
+    private void showUpdateFailed(String errorString) {
+        Toast toast = Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

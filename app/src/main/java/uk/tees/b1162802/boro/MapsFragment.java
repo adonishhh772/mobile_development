@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -38,6 +40,8 @@ public class MapsFragment extends Fragment {
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "settingpref";
     Calendar c = Calendar.getInstance();
     private GestureDetector mDetector;
     int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
@@ -77,20 +81,22 @@ public class MapsFragment extends Fragment {
 
         final TextView greetingText = (TextView) view.findViewById(R.id.greetings);
         final ImageView imageView = (ImageView) view.findViewById(R.id.iconGreeting);
-
-
-        if (timeOfDay >= 0 && timeOfDay < 12) {
+       if (timeOfDay >= 0 && timeOfDay < 12) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.daytime_logo_foreground));
-            greetingText.setText("Good Morning");
+            String greeting = "Good Morning ";
+            greetingText.setText(greeting);
         } else if (timeOfDay >= 12 && timeOfDay < 16) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.daytime_logo_foreground));
-            greetingText.setText("Good Afternoon");
+            String greeting = "Good Afternoon " ;
+            greetingText.setText(greeting);
         } else if (timeOfDay >= 16 && timeOfDay < 21) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.night_logo_foreground));
-            greetingText.setText("Good Evening");
+            String greeting = "Good Evening ";
+            greetingText.setText(greeting);
         } else if (timeOfDay >= 21 && timeOfDay < 24) {
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.night_logo_foreground));
-            greetingText.setText("Good Night");
+            String greeting = "Good Night ";
+            greetingText.setText(greeting);
 
         }
 
