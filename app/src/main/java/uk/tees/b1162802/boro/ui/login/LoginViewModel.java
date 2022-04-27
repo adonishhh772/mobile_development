@@ -6,40 +6,17 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import uk.tees.b1162802.boro.data.LoginRepository;
-import uk.tees.b1162802.boro.data.Result;
-import uk.tees.b1162802.boro.data.model.LoggedInUser;
 import uk.tees.b1162802.boro.R;
 
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private LoginRepository loginRepository;
 
-    LoginViewModel(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
-    }
 
     LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
     }
 
-    LiveData<LoginResult> getLoginResult() {
-        return loginResult;
-    }
-
-    public void login(String userID,String username, String password) {
-        // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(userID,username, password);
-
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
-    }
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import uk.tees.b1162802.boro.data.ForgotPassDataSource;
 import uk.tees.b1162802.boro.data.ForgotPassRepository;
-import uk.tees.b1162802.boro.data.LoginRepository;
 
 public class ForgotPasswordViewModelFactory implements ViewModelProvider.Factory {
 

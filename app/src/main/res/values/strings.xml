@@ -9,6 +9,8 @@
     <string name="prompt_email">Email</string>
     <string name="not_allowed">N/A</string>
     <string name="update_password_title">Update Password</string>
+    <string name="continue_update">Continue</string>
+    <string name="choose_services">Choose a Service You Provide</string>
     <string name="prompt_date">Date of Birth</string>
     <string name="prompt_provider">I am a provider</string>
     <string name="prompt_name">Full Name</string>
@@ -17,6 +19,7 @@
     <string name="prompt_gender">Gender</string>
     <string name="prompt_address">Address</string>
     <string name="prompt_service_provider">Search Providers</string>
+    <string name="prompt_service_services">Search Services</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_old_password">Old Password</string>
     <string name="prompt_new_password">New Password</string>
@@ -42,6 +45,7 @@
     <string name="update_success">"Password Updated Successfully"</string>
     <string name="register_failed">"Registration failed"</string>
     <string name="forgot">"Forgot Username or password?"</string>
+    <string name="logout">"Logout"</string>
 
     <string-array name="gender_value">
         <item>Male</item>
@@ -64,6 +68,8 @@
     <string name="edit">Edit Profile</string>
     <string name="update">Update Profile</string>
     <string name="terms_condition">TERMS AND CONDITIONS</string>
+    <string name="terms_software">SOFTWARE LICENSE</string>
+    <string name="terms_misconduct">HARASSMENT AND MISCONDUCT</string>
     <string name="sub_header_terms">PLEASE REVIEW OUR TERMS OF USE AND PRIVACY POLICY CAREFULLY BEFORE DOWNLOADING OUR APPLICATION OR USING OUR SERVICE FOR THE FIRST TIME.</string>
     <string name="intro_terms">
         <b>-</b> These Terms of Use <b>(\"Terms\")</b> describe the terms and conditions upon which Clients <b>(\"You\" or “Your” or “Yourself” or “User\")</b> access and use the Application (defined herein).
@@ -76,4 +82,11 @@
         \n\n\n <b>-</b> If you do not agree with these Terms, do not use this Application or Mobility Services.
         \n\n\n <b>-</b> You acknowledge and agree that <b>Boro Service Provider</b> is a technology service provider which acts as an intermediary between you and the Partner who provides Mobility Services as distinct from transportation services. Upon your execution (electronic or otherwise) of these Terms, you and <b>Boro Service Provider</b> shall be bound by details set forth herein.
         \n\n\n <b>-</b> <b>Boro Service Provider</b> and You shall be individually referred to as <b>“Party”</b> and collectively as <b>“Parties”.</b></string>
+    <string name="software_usage">"Subject to your compliance with these Terms, <b>Boro Service Provider</b> grants you a limited non-exclusive, non-sub licensee, revocable, non-transferable license to use the Application on your personal device, solely for your personal use.  "</string>
+    <string name="harassment_text">
+        <b>-</b> "Harassment or misconduct refers to any unwanted conduct, contact or behavior undertaken by one Party toward another, whether sexual, physical or verbal, without explicit consent of the other person.
+        \n\n\n<b>-</b> You are requested to not touch, behave inappropriately, or make inappropriate comments to your Partner while using the Mobility Service.
+        \n\n\n<b>-</b> Examples or impropriety include nudges, whistles, winks, touches or flirting with the Partner.
+        \n\n\n<b>-</b> Your contact with your Partner should end when the trip is completed.
+        \n\n\n<b>-</b> If you find any reason to believe that the Partner is not behaving in an appropriate way, you may cancel the Mobility Service immediately and inform <b>Boro Service Provider</b> as soon as possible. "</string>
 </resources>

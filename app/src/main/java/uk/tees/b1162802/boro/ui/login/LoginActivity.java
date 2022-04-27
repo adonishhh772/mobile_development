@@ -1,6 +1,5 @@
 package uk.tees.b1162802.boro.ui.login;
 
-import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -43,8 +42,6 @@ import uk.tees.b1162802.boro.NavigationActivity;
 import uk.tees.b1162802.boro.R;
 import uk.tees.b1162802.boro.data.model.LoggedInUser;
 import uk.tees.b1162802.boro.ui.forgotPass.ForgotPasswordActivity;
-import uk.tees.b1162802.boro.ui.login.LoginViewModel;
-import uk.tees.b1162802.boro.ui.login.LoginViewModelFactory;
 import uk.tees.b1162802.boro.databinding.ActivityLoginBinding;
 import uk.tees.b1162802.boro.ui.register.RegisterActivity;
 
@@ -110,26 +107,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoggedFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    getUserDetails();
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -165,6 +142,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(passwordFromDB.equals(passwordLayout.getEditText().getText().toString())){
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", snapshot.child(userID).child("fullname").getValue(String.class));
+                        boolean isProvider = false;
+                        if(snapshot.child(userID).child("isProvider").getValue(String.class).equals("true")){
+                            isProvider = true;
+                        }
+                        editor.putBoolean("isProvider",isProvider);
                         editor.apply();
                     }
                 }
@@ -178,10 +160,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+    private void updateUiWithUser(String model) {
+        String welcome = getString(R.string.welcome) + model;
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("email", model.getDisplayName());
+        editor.putString("email", model);
         editor.putBoolean("isLogged", true);
         editor.apply();
         // TODO : initiate successful logged in experience
@@ -189,11 +171,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent mainIntent = new Intent(this, NavigationActivity.class);
         startActivity(mainIntent);
     }
-
-    private void showLoggedFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
-
 
     private void showLoginFailed(View view,String errorString) {
         Snackbar.make(view,
@@ -220,9 +197,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     userID = user.getUid();
                                     editor.putString("userID", user.getUid());
                                     editor.apply();
-                                    loginViewModel.login(user.getUid(),usernameEditText.getText().toString(),
-                                            passwordEditText.getText().toString());
-//                                    updateUiWithUser(user.toString());
+                                    getUserDetails();
+//                                    loginViewModel.login(user.getUid(),usernameEditText.getText().toString(),
+//                                            passwordEditText.getText().toString());
+                                    updateUiWithUser(user.getEmail());
                                 } else {
                                     // If sign in fails, display a message to the user.
 //                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());

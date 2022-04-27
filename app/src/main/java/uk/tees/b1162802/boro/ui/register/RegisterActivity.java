@@ -275,6 +275,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     }
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("userID", user.getUid());
+                                    editor.putBoolean("isProvider", provider.isChecked());
                                     editor.apply();
                                     registerViewModel.register(user.getUid(),register);
 //                                    updateUiWithUser(user.getEmail());

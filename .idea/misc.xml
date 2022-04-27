@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_profile_edit.xml" value="0.18115942028985507" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/add_category.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/app_bar_navigation.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/layout/completed_services.xml" value="0.18696036960767667" />
         <entry key="app/src/main/res/layout/content_navigation.xml" value="0.15172101449275363" />
@@ -43,7 +44,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout/fragment_terms.xml" value="0.16293929712460065" />
-        <entry key="app/src/main/res/layout/nav_header_navigation.xml" value="0.11458333333333333" />
+        <entry key="app/src/main/res/layout/nav_header_navigation.xml" value="0.2" />
         <entry key="app/src/main/res/layout/search_modal_fragment.xml" value="0.284698486328125" />
         <entry key="app/src/main/res/layout/setting_list_group.xml" value="0.39332784016927086" />
         <entry key="app/src/main/res/layout/setting_list_item.xml" value="0.23852386474609377" />
