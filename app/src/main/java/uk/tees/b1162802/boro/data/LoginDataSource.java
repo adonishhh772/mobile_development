@@ -41,7 +41,6 @@ public class LoginDataSource {
                                     snapshot.child(userID).child("mobile").getValue(String.class),
                                     snapshot.child(userID).child("birthday").getValue(String.class),
                                     snapshot.child(userID).child("gender").getValue(String.class),
-                                   false,
                                     snapshot.child(userID).child("age").getValue(String.class),
                                     snapshot.child(userID).child("fullname").getValue(String.class)
 
@@ -74,7 +73,6 @@ public class LoginDataSource {
                     "",
                     "",
                     "",
-                   false,
                     "",
                     ""
             );
@@ -86,7 +84,4 @@ public class LoginDataSource {
         }
     }
 
-    public void logout() {
-        // TODO: revoke authentication
-    }
 }

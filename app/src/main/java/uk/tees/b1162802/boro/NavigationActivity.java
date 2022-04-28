@@ -72,7 +72,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     String username;
     ProgressBar loadingBar;
     Dialog dialog;
-    boolean isProvider;
     RelativeLayout logoutLayout;
     StorageReference storageReference;
     NavigationView navigationView;
@@ -101,7 +100,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         registerReceiver(registerReceiver, intentFilter);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         username = sharedPreferences.getString("email","Boro Service Provider");
-        isProvider = sharedPreferences.getBoolean("isProvider",false);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         userID = sharedPreferences.getString("userID","Boro Service Provider");
@@ -136,98 +134,10 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         } );
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        if(isProvider){
-            fetchServiceOfUser();
-        }
 
 
     }
 
-    private void fetchServiceOfUser() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        final Query checkUser = reference.orderByChild("username").equalTo(username);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String userServices = snapshot.child(userID).child("service").getValue(String.class);
-                    if(userServices == null){
-                        createCategoryForUser();
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void createCategoryForUser() {
-
-        root.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    ArrayList<String> services = new ArrayList<>();
-                    for(DataSnapshot ds : snapshot.getChildren()) {
-                        String key = ds.getKey();
-                        services.add(key);
-                    }
-                    final ArrayAdapter arrayAdapter = new ArrayAdapter(NavigationActivity.this,R.layout.dropdown_item,services);
-                    DisplayMetrics metrics = getResources().getDisplayMetrics();
-                    int width = metrics.widthPixels;
-                    double height_value = (2 * metrics.heightPixels);
-                    int height = (int) Math.round(height_value);
-                    dialog = new Dialog(NavigationActivity.this);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setCancelable(false);
-                    dialog.setContentView(R.layout.add_category);
-                    dialog.getWindow().setLayout((6 * width)/7, (height)/5);
-                    dialog.show();
-                    TextInputLayout serviceLayout = dialog.findViewById(R.id.servicesTextField);
-                    AutoCompleteTextView servicesDropDown = dialog.findViewById(R.id.services);
-                    servicesDropDown.setAdapter(arrayAdapter);
-                    loadingBar = dialog.findViewById(R.id.loading);
-                    MaterialButton updateServices = dialog.findViewById(R.id.updateServices);
-                    updateServices.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                            Log.i("TAG", "onClick: "+services.contains(servicesDropDown.getText().toString().trim()));
-                            if(TextUtils.isEmpty(servicesDropDown.getText())){
-                                serviceLayout.setError("Empty Services selected");
-                            }else{
-                                serviceLayout.setError(null);
-                                updateServices.setVisibility(View.GONE);
-                                loadingBar.setVisibility(View.VISIBLE);
-                                DatabaseReference userRoot = db.getReference().child("Users");
-                                userRoot.child(userID).child("service").setValue(servicesDropDown.getText().toString().trim());
-
-                                if(!services.contains(servicesDropDown.getText().toString().trim())){
-                                    Map<String, String> allServices = new HashMap<>();
-                                    allServices.put("name",servicesDropDown.getText().toString().trim());
-                                    DatabaseReference serviceRoot = db.getReference().child("Category");
-                                    serviceRoot.child(servicesDropDown.getText().toString().trim()).setValue(allServices);
-                                }
-                                updateServices.setVisibility(View.VISIBLE);
-                                loadingBar.setVisibility(View.GONE);
-
-                                dialog.dismiss();
-                            }
-                        }
-                    });
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 
     private void getProfileImage() {

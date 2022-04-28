@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomsheet"
     app:behavior_hideable="false"
     android:layout_width="match_parent"
@@ -12,9 +13,9 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end">
 
         <ImageView
             android:id="@+id/iconGreeting"
@@ -27,10 +28,9 @@
             android:id="@+id/greetings"
             android:layout_width="wrap_content"
             android:layout_height="62dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="130dp"
+            android:layout_marginStart="60dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:paddingTop="12dp"
+            android:paddingTop="14dp"
             android:text="TextView"
             android:textColor="#050505"
             android:textSize="26sp"
@@ -54,7 +54,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView7"
                 android:layout_width="271dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
@@ -68,7 +67,6 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageView3"
                 android:layout_width="98dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
@@ -78,5 +76,76 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <RelativeLayout
+        android:background="@drawable/borders"
+        android:id="@+id/setHomeAddress"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="false"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="0dp"
+            android:rotationY="180"
+            app:srcCompat="@drawable/ic_baseline_home_24" />
+
+        <TextView
+            android:layout_width="337dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="sans-serif-smallcaps"
+            android:paddingTop="15dp"
+            android:text="@string/set_home"
+            android:textAlignment="viewStart"
+            android:textColor="#040303"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="58dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:rotationY="180"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
+        </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/setWorkAddress"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="false"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="0dp"
+            android:rotationY="180"
+            app:srcCompat="@drawable/ic_baseline_home_work_24" />
+
+        <TextView
+            android:layout_width="338dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="sans-serif-smallcaps"
+            android:paddingTop="15dp"
+            android:text="@string/set_work"
+            android:textAlignment="viewStart"
+            android:textColor="#040303"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="58dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:rotationY="180"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
+    </RelativeLayout>
 
 </LinearLayout>

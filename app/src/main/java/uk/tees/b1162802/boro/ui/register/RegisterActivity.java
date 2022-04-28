@@ -59,7 +59,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     TextInputEditText emailEditText,ageEditText,fullnameEditText,mDateFormat,passwordEditText,addressEditText,mobileEditText;
     TextInputLayout nameLayout,emailLayout,ageLayout,genderLayout,dateLayout,passwordEditLayout, addressEditLayout,mobileEditLayout;
     TextView loginTextView;
-    CheckBox provider;
     FloatingActionButton registerBtn;
     ProgressBar loadingProgress;
     private FirebaseAuth mAuth;
@@ -99,7 +98,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dateLayout = binding.dateTextField;
         registerBtn = binding.register;
         loadingProgress = binding.loading;
-        provider = binding.isProvider;
         registerBtn.setOnClickListener(this);
 
         registerViewModel = new ViewModelProvider(this, new RegisterViewModelFactory())
@@ -268,14 +266,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     register.put("age", ageEditText.getText().toString());
                                     register.put("gender", binding.gender.getText().toString());
                                     register.put("birthday", mDateFormat.getText().toString());
-                                    if(provider.isChecked()){
-                                        register.put("isProvider","true");
-                                    }else{
-                                        register.put("isProvider","false");
-                                    }
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("userID", user.getUid());
-                                    editor.putBoolean("isProvider", provider.isChecked());
                                     editor.apply();
                                     registerViewModel.register(user.getUid(),register);
 //                                    updateUiWithUser(user.getEmail());

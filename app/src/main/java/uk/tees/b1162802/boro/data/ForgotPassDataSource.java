@@ -4,7 +4,6 @@ import java.io.IOException;
 
 
 public class ForgotPassDataSource {
-    public String url = "https://boro-service-provider-default-rtdb.firebaseio.com/users/";
 
     public Result<String> forgotPass(String username) {
 

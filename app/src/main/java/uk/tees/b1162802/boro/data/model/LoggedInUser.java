@@ -11,7 +11,6 @@ public class LoggedInUser {
     private String mobile;
     private String dob;
     private String gender;
-    private boolean isProvider;
     private String age;
     private String fullname;
 
@@ -20,7 +19,7 @@ public class LoggedInUser {
     public LoggedInUser(String userId, String displayName,
                         String password, String mobile,
                         String dob, String gender,
-                        boolean isProvider, String age,
+                        String age,
                         String fullname) {
         this.userId = userId;
         this.displayName = displayName;
@@ -28,7 +27,6 @@ public class LoggedInUser {
         this.mobile = mobile;
         this.dob = dob;
         this.gender = gender;
-        this.isProvider = isProvider;
         this.fullname = fullname;
         this.age = age;
     }
@@ -55,10 +53,6 @@ public class LoggedInUser {
 
     public String getGender() {
         return gender;
-    }
-
-    public boolean getProvider(){
-        return isProvider;
     }
 
     public String getName(){

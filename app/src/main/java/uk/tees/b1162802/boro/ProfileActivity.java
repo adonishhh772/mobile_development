@@ -110,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     FloatingActionButton editProfile;
     String userID, username;
     boolean editAction = true;
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+//    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,7 +261,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getAllUserDetails() {
-        final Query checkUser = reference.orderByChild("username").equalTo(username);
+        final Query checkUser = root.orderByChild("username").equalTo(username);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

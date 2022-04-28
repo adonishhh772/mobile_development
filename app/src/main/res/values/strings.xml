@@ -18,8 +18,10 @@
     <string name="prompt_age">Age</string>
     <string name="prompt_gender">Gender</string>
     <string name="prompt_address">Address</string>
-    <string name="prompt_service_provider">Search Providers</string>
-    <string name="prompt_service_services">Search Services</string>
+    <string name="prompt_service_provider">Filter Services</string>
+    <string name="set_home">Set Home Address</string>
+    <string name="set_work">Set Work Address</string>
+    <string name="prompt_service_services">Select Services</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_old_password">Old Password</string>
     <string name="prompt_new_password">New Password</string>

@@ -142,11 +142,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(passwordFromDB.equals(passwordLayout.getEditText().getText().toString())){
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", snapshot.child(userID).child("fullname").getValue(String.class));
-                        boolean isProvider = false;
-                        if(snapshot.child(userID).child("isProvider").getValue(String.class).equals("true")){
-                            isProvider = true;
-                        }
-                        editor.putBoolean("isProvider",isProvider);
                         editor.apply();
                     }
                 }

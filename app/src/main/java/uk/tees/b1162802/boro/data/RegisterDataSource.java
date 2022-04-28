@@ -25,7 +25,6 @@ public class RegisterDataSource {
                             registerDetail.get("mobile"),
                             registerDetail.get("birthday"),
                             registerDetail.get("gender"),
-                            registerDetail.get("isProvider") == "true" ? true : false,
                             registerDetail.get("age"),
                             registerDetail.get("fullname"));
             return new Result.Success<>(user);

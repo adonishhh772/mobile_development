@@ -50,7 +50,7 @@
                 android:id="@+id/fullNameTextField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="384dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="60dp"
                 android:hint="@string/prompt_name"
@@ -72,7 +72,7 @@
                 android:id="@+id/usernameTextField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="384dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:hint="@string/prompt_email"
@@ -94,7 +94,7 @@
                 android:id="@+id/passwordTextField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="384dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:hint="@string/prompt_password"
@@ -117,7 +117,7 @@
                 android:id="@+id/phoneTextField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="384dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:hint="@string/prompt_number"
                 app:boxStrokeColor="#FFC107"
@@ -137,7 +137,7 @@
                 android:id="@+id/addressTextField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="384dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:hint="@string/prompt_address"
                 app:boxStrokeColor="#FFC107"
@@ -154,21 +154,20 @@
                     tools:layout_editor_absoluteY="428dp" />
             </com.google.android.material.textfield.TextInputLayout>
             <RelativeLayout
-                android:layout_width="395dp"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ageTextField"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="150dp"
-                    android:layout_height="78dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="5dp"
                     android:hint="@string/prompt_age"
                     app:boxStrokeColor="#FFC107"
                     app:errorEnabled="true"
-                    app:hintTextColor="#120E0E"
-                    >
+                    app:hintTextColor="#120E0E">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/age"
@@ -184,7 +183,7 @@
                     android:id="@+id/genderTextField"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="222dp"
-                    android:layout_height="78dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="170dp"
                     android:layout_marginTop="5dp"
                     android:hint="@string/prompt_gender"
@@ -210,7 +209,7 @@
                 android:id="@+id/dateTextField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="384dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:hint="@string/prompt_date"
@@ -228,16 +227,6 @@
                     tools:layout_editor_absoluteY="428dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <CheckBox
-                style="@style/Widget.App.CheckBox"
-                android:layout_width="match_parent"
-                android:id="@+id/isProvider"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/prompt_provider"
-                android:textSize="20sp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/register"
