@@ -39,113 +39,64 @@
 
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:id="@+id/showProvider"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:elevation="20dp"
-        app:cardCornerRadius="20dp" >
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="271dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="100dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:paddingTop="15dp"
-                android:text="@string/prompt_service_provider"
-                android:textAlignment="center"
-                android:textColor="#040303"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="98dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="0dp"
-                android:rotationY="180"
-                app:srcCompat="?attr/homeAsUpIndicator" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
     <RelativeLayout
-        android:background="@drawable/borders"
-        android:id="@+id/setHomeAddress"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="false"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="0dp"
-            android:rotationY="180"
-            app:srcCompat="@drawable/ic_baseline_home_24" />
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_home_work_24" />
 
         <TextView
-            android:layout_width="337dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
+            android:id="@+id/placeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:paddingTop="15dp"
-            android:text="@string/set_home"
-            android:textAlignment="viewStart"
-            android:textColor="#040303"
+            android:text="Places"
+            android:textAlignment="textStart"
             android:textSize="24sp"
             android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="58dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="0dp"
-            android:rotationY="180"
-            app:srcCompat="@drawable/ic_baseline_add_24" />
-        </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/setWorkAddress"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-
-        <ImageView
-            android:layout_width="38dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="false"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="0dp"
-            android:rotationY="180"
-            app:srcCompat="@drawable/ic_baseline_home_work_24" />
-
-        <TextView
-            android:layout_width="338dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:fontFamily="sans-serif-smallcaps"
-            android:paddingTop="15dp"
-            android:text="@string/set_work"
-            android:textAlignment="viewStart"
-            android:textColor="#040303"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="58dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="0dp"
-            android:rotationY="180"
-            app:srcCompat="@drawable/ic_baseline_add_24" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="@string/weather"
+        android:textAlignment="center"
+        android:textColor="#171616"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/weatherInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/weather"
+        android:textAlignment="center"
+        android:textColor="#171616"
+        android:textSize="24sp" />
+    <TextView
+        android:id="@+id/noNews"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_margin="15dp"
+        android:visibility="gone"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_width="match_parent"
+        android:text="@string/no_news"
+        android:layout_height="wrap_content"/>
+    <ListView
+        android:id="@+id/newsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+
 
 </LinearLayout>

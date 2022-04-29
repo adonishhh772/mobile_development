@@ -53,6 +53,7 @@ dependencies {
     implementation 'androidx.biometric:biometric:1.1.0'
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-storage:20.0.1'
+    implementation files('libs/java-json.jar')
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.google.firebase:firebase-auth'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

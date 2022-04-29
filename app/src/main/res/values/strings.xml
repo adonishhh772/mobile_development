@@ -20,7 +20,8 @@
     <string name="prompt_address">Address</string>
     <string name="prompt_service_provider">Filter Services</string>
     <string name="set_home">Set Home Address</string>
-    <string name="set_work">Set Work Address</string>
+    <string name="weather">Weather</string>
+    <string name="no_news">No news available for this region</string>
     <string name="prompt_service_services">Select Services</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_old_password">Old Password</string>

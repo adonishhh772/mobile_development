@@ -17,11 +17,6 @@
         android:label="@string/menu_favourites"
         tools:layout="@layout/fragment_favourites" />
 
-    <fragment
-        android:id="@+id/nav_service"
-        android:name="uk.tees.b1162802.boro.ui.services.ServiceFragment"
-        android:label="@string/menu_services"
-        tools:layout="@layout/fragment_services" />
 
     <fragment
         android:id="@+id/nav_setting"

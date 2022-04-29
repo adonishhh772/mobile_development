@@ -119,7 +119,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_service, R.id.nav_favourites, R.id.nav_setting, R.id.nav_terms)
+            R.id.nav_favourites, R.id.nav_setting, R.id.nav_terms)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navigation);

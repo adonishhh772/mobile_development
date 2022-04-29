@@ -91,21 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         bottomSheetDialog.setContentView(bottomSheetView);
         bottomSheetDialog.show();
 
-         // Add a touch listener to the view
-        // The touch listener passes all its events on to the gesture detector
-        bottomSheetView.findViewById(R.id.showProvider).setOnTouchListener(new View.OnTouchListener() {
-                                      @Override
-                                      public boolean onTouch(View v, MotionEvent event) {
-                                          // pass the events to the gesture detector
-                                          // a return value of true means the detector is handling it
-                                          // a return value of false means the detector didn't
-                                          // recognize the event
 
-                                          return mDetector.onTouchEvent(event);
-
-                                      }
-                                  }
-        );;
     }
 
     @Override

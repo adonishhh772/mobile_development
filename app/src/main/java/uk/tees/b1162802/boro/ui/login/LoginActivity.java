@@ -191,6 +191,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     userID = user.getUid();
                                     editor.putString("userID", user.getUid());
+                                    editor.putString("username", user.getDisplayName());
                                     editor.apply();
                                     getUserDetails();
 //                                    loginViewModel.login(user.getUid(),usernameEditText.getText().toString(),
