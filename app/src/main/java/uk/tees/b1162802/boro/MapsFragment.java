@@ -1,5 +1,7 @@
 package uk.tees.b1162802.boro;
 
+import static android.app.Activity.RESULT_OK;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -34,6 +36,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -45,7 +48,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,6 +69,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -80,6 +91,7 @@ public class MapsFragment extends Fragment {
     SharedPreferences sharedPreferences;
     LinearLayout bottomSheet;
     String username;
+    TextInputEditText placesLayout;
     ListView listView;
     TextView placesName, noNews, weatherNews;
     private static final String SHARED_PREF_NAME = "settingpref";
@@ -263,11 +275,13 @@ public class MapsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        Places.initialize(getContext().getApplicationContext(),"AIzaSyAu63qsym8VNv-4qGwyPjNXP3J_fMJyzJs");
         final TextView greetingText =  view.findViewById(R.id.greetings);
         final ImageView imageView = view.findViewById(R.id.iconGreeting);
         placesName = view.findViewById(R.id.placeName);
         listView = view.findViewById(R.id.newsList);
         noNews = view.findViewById(R.id.noNews);
+        placesLayout = view.findViewById(R.id.places);
         weatherNews = view.findViewById(R.id.weatherInfo);
         username = sharedPreferences.getString("username","Boro Service Provider");
         String[] splited = username.split("\\s+");
@@ -294,6 +308,15 @@ public class MapsFragment extends Fragment {
         // get the gesture detector
         mDetector = new GestureDetector(this.getActivity(), new Gestures());
 
+       placesLayout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+                List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS,Place.Field.LAT_LNG,Place.Field.NAME);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY,fieldList).build((requireActivity()));
+
+                getActivity().startActivityForResult(intent,100);
+           }
+       });
 
             bottomSheet= getView().findViewById(R.id.bottomsheet);
 
@@ -327,6 +350,26 @@ public class MapsFragment extends Fragment {
 
 
         }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100 && resultCode == RESULT_OK){
+            Place place = Autocomplete.getPlaceFromIntent(data);
+
+            marker.remove();
+            MarkerOptions markerOptions = new MarkerOptions().position(place.getLatLng()).draggable(true).title("I am here!");
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 10));
+            marker = mMap.addMarker(markerOptions);
+            getGoecoderAddress(place.getLatLng());
+
+
+        }else if(resultCode == AutocompleteActivity.RESULT_ERROR){
+            Status status = Autocomplete.getStatusFromIntent(data);
+            Toast.makeText(getContext(),status.getStatusMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
 
     // This touch listener passes everything on to the gesture detector.
     // That saves us the trouble of interpreting the raw touch events

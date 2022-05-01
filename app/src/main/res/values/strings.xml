@@ -7,6 +7,7 @@
     <string name="register_name">Register</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_map">Search in map</string>
     <string name="not_allowed">N/A</string>
     <string name="update_password_title">Update Password</string>
     <string name="continue_update">Continue</string>
