@@ -126,8 +126,8 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
-            //LatLng latLng = new LatLng(40.7128,74.0060);
-            LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+            LatLng latLng = new LatLng(40.7128,74.0060);
+//            LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions().position(latLng).draggable(false).title("I am here!");
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
@@ -434,14 +434,7 @@ public class MapsFragment extends Fragment {
                 }
             });
 
-//            if (mapFragment != null) {
-////            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                fetchLocation();
-////            }
-//
-//            }
-
-
+           fetchLocation();
         }
 
     @Override
@@ -491,6 +484,10 @@ public class MapsFragment extends Fragment {
     }
 
     private void fetchLocation() {
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        assert mapFragment != null;
+        mapFragment.getMapAsync(callback);
         if (ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -498,14 +495,11 @@ public class MapsFragment extends Fragment {
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
-//        Toast.makeText(getContext(), "FFFFFF", Toast.LENGTH_SHORT).show();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                Log.i("TAG", "fetchLocation: "+location);
                 if (location != null) {
                     currentLocation = location;
-                    Toast.makeText(getContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     SupportMapFragment mapFragment =
                             (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
                     assert mapFragment != null;

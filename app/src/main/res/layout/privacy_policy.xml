@@ -21,7 +21,6 @@
             android:layout_marginEnd="8dp"
             android:text="@string/privacy_title"
             android:textAlignment="center"
-            android:textColor="#090101"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -45,7 +44,6 @@
             android:layout_marginEnd="8dp"
             android:text="@string/your_consent"
             android:textAlignment="center"
-            android:textColor="#150505"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -69,7 +67,6 @@
             android:layout_marginEnd="8dp"
             android:text="@string/collect"
             android:textAlignment="center"
-            android:textColor="#150505"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -93,7 +90,6 @@
             android:layout_marginEnd="8dp"
             android:text="@string/your_usage"
             android:textAlignment="center"
-            android:textColor="#150505"
             android:textSize="20sp"
             android:textStyle="bold" />
 
