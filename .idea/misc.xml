@@ -62,7 +62,14 @@
         <entry key="app/src/main/res/menu/navigation.xml" value="0.2515625" />
         <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.2515625" />
         <entry key="app/src/main/res/menu/profile_menu.xml" value="0.10233306884765625" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/boro_logo.xml" value="0.1085" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/boro_logo_round.xml" value="0.1085" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/daytime_logo.xml" value="0.1085" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1085" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1085" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/no_data_found.xml" value="0.1965" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/no_data_found_round.xml" value="0.1085" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/teeside_logo.xml" value="0.1085" />
       </map>
     </option>
   </component>
