@@ -26,11 +26,14 @@
         android:hint="@string/prompt_map"
         app:boxStrokeColor="#FFC107"
         app:errorEnabled="true"
+        app:helperTextTextColor="@color/black"
+        app:prefixTextColor="@color/black"
         app:hintTextColor="#120E0E"
         app:startIconDrawable="@drawable/ic_baseline_map_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/places"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:focusable="false"

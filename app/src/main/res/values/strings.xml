@@ -7,8 +7,14 @@
     <string name="register_name">Register</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_contact_email">University Email</string>
+    <string name="prompt_contact_number">University Number</string>
+    <string name="prompt_contact_address">University Address</string>
     <string name="prompt_map">Search in map</string>
     <string name="not_allowed">N/A</string>
+    <string name="contact_email">b1162802@live.tees.ac.uk</string>
+    <string name="contact_mobile">01642 218121</string>
+    <string name="contact_address">Campus Heart, Southfield Rd, Middlesbrough TS1 3BX</string>
     <string name="update_password_title">Update Password</string>
     <string name="continue_update">Continue</string>
     <string name="choose_services">Choose a Service You Provide</string>
@@ -68,10 +74,14 @@
     <string name="menu_favourites">My Favourites</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_terms">Terms and condition</string>
+    <string name="menu_privacy">Privacy Policy</string>
+    <string name="menu_contact_us">Contact Us</string>
     <string name="title_activity_profile">My Profile</string>
     <string name="edit">Edit Profile</string>
     <string name="update">Update Profile</string>
     <string name="terms_condition">TERMS AND CONDITIONS</string>
+    <string name="privacy_title">PRIVACY POLICY</string>
+    <string name="fav_title">My Favourite</string>
     <string name="terms_software">SOFTWARE LICENSE</string>
     <string name="terms_misconduct">HARASSMENT AND MISCONDUCT</string>
     <string name="sub_header_terms">PLEASE REVIEW OUR TERMS OF USE AND PRIVACY POLICY CAREFULLY BEFORE DOWNLOADING OUR APPLICATION OR USING OUR SERVICE FOR THE FIRST TIME.</string>
@@ -93,4 +103,17 @@
         \n\n\n<b>-</b> Examples or impropriety include nudges, whistles, winks, touches or flirting with the Partner.
         \n\n\n<b>-</b> Your contact with your Partner should end when the trip is completed.
         \n\n\n<b>-</b> If you find any reason to believe that the Partner is not behaving in an appropriate way, you may cancel the Mobility Service immediately and inform <b>Boro Service Provider</b> as soon as possible. "</string>
+    <string name="intro_privacy">Our mission at <b>Boro Service Provider</b> is to facilitate the freedom of mobility for all. When you use the services provided by <b>Boro Service Provider (\" we\" or \" our\") </b>including our application <b>( \"Apps\" )</b> that enable you to connect to our systems and obtain services <b>(\" Platform\")</b>, we collect, use and share some of your personal information. This Policy details the collection, use and disclosure of user information in connection with the <b>Boro</b> application.  This Policy applies to all of our users/clients and partners (collectively <b>\" you\", \" your\" or \" yours\"</b>), and our Platform and services.  All terms that have not been specifically defined herein shall have the same meaning as provided under the Terms of Use. This Privacy Policy should be read in conjunction with the Terms of Use as applicable to the Boro service(s) that you are using.</string>
+    <string name="your_consent">Your Consent:</string>
+    <string name="policy_info">By using the Tootle application, you agree to provide consent to the collection, use and sharing of your personal information as described in this Policy.</string>
+    <string name="collect">Collection of Information:</string>
+    <string name="collect_info">When you use the Boro application, we collect and hold the information that you provide for our business purposes and functions:
+        \n\n\n <b>Personal Information of User</b> such as your name, gender, email address, phone number, and information about your device is collected when you use the Boro application. You may also opt to share additional information with us about your profile, including your photo, saved addresses, and other preferences.
+        \n\n\n <b>Location Information:</b> We collect information like your GPS location and IP address depending on whether you use our Platform as customer or a partner:
+        \n\n\n      <b>User Location Data:</b> We collect data from our Users\' mobile devices if they enable us to do so .</string>
+    <string name="your_usage">Use of your personal information:</string>
+    <string name="info_usage"><b>We use your personal information to:  </b>
+        \n\nDisplay this information on our Platform Maintain the safety and security of our users (Customers, Partners and Drivers) Provide customer support Improve our Platform Comply with legal and statutory obligations Build and maintain the Boro community
+        \n\n\nWe also use your personal information to continually improve our Platform and provide you with the most efficient and superior user experience, possible.
+        \n\n\n <b>Specifically, your information is used to: </b> Verify your identity and maintain your account </string>
 </resources>

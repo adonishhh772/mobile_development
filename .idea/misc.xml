@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/add_category.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/app_bar_navigation.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/layout/completed_services.xml" value="0.18696036960767667" />
+        <entry key="app/src/main/res/layout/contact_us.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_navigation.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/layout/content_navigation2.xml" value="0.11614583333333334" />
         <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.1" />
@@ -48,6 +49,7 @@
         <entry key="app/src/main/res/layout/fragment_terms.xml" value="0.16293929712460065" />
         <entry key="app/src/main/res/layout/nav_header_navigation.xml" value="0.2" />
         <entry key="app/src/main/res/layout/news_row.xml" value="0.34186706542968753" />
+        <entry key="app/src/main/res/layout/privacy_policy.xml" value="0.1" />
         <entry key="app/src/main/res/layout/search_modal_fragment.xml" value="0.21671018276762402" />
         <entry key="app/src/main/res/layout/setting_list_group.xml" value="0.39332784016927086" />
         <entry key="app/src/main/res/layout/setting_list_item.xml" value="0.23852386474609377" />

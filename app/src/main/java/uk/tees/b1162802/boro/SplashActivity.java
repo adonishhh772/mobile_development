@@ -86,12 +86,14 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             authenticateBtn(splashLayout);
 
         }
-        if(isNightEnabled){
+        else if(isNightEnabled){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            initializeSplash();
         }
 
 
-        initializeSplash();
+//        initializeSplash();
     }
 
     private void initializeSplash() {

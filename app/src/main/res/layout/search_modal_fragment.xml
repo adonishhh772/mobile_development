@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomsheet"
     app:behavior_hideable="false"
     android:layout_width="match_parent"
@@ -13,15 +12,14 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end">
+        android:gravity="start">
 
         <ImageView
             android:id="@+id/iconGreeting"
             android:layout_width="86dp"
             android:layout_height="61dp"
-            android:layout_alignParentEnd="false"
             android:src="@drawable/night_logo_foreground" />
 
         <TextView
@@ -35,6 +33,17 @@
             android:textColor="#050505"
             android:textSize="26sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iconFavourite"
+            android:visibility="gone"
+            android:layout_width="56dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="51dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_baseline_favorite_border_24" />
+
 
 
     </RelativeLayout>
@@ -56,6 +65,7 @@
             android:layout_marginStart="40dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="Places"
+            android:textColor="@color/black"
             android:textAlignment="textStart"
             android:textSize="24sp"
             android:textStyle="bold" />

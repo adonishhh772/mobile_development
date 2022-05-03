@@ -56,8 +56,12 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,16 +70,21 @@ import org.json.XML;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import uk.tees.b1162802.boro.Adapter.NewsAdapter;
+import uk.tees.b1162802.boro.data.Result;
+import uk.tees.b1162802.boro.data.model.LoggedInUser;
 import uk.tees.b1162802.boro.data.model.News;
 import uk.tees.b1162802.boro.features.Gestures;
 
@@ -90,7 +99,9 @@ public class MapsFragment extends Fragment {
     private static final int REQUEST_CODE = 101;
     SharedPreferences sharedPreferences;
     LinearLayout bottomSheet;
-    String username;
+    String username,userID;
+    Map<String,Boolean> isFavourite = new HashMap<>();
+    ImageView favoriteImg;
     TextInputEditText placesLayout;
     ListView listView;
     TextView placesName, noNews, weatherNews;
@@ -145,10 +156,91 @@ public class MapsFragment extends Fragment {
             placesName.setText(add);
             getNewsOfLocality(add);
             getWeatherofLocality(latLng);
+            showIfFavourite(add);
             sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            favoriteImg.setVisibility(View.VISIBLE);
+            favoriteImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setAndStoreFavourite(add);
+                }
+
+
+            });
             // TennisAppActivity.showDialog(add);
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showIfFavourite(String address){
+        try {
+            DatabaseReference fav = db.getReference().child("Favourite");
+           fav.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+
+                        for(DataSnapshot ds : snapshot.getChildren()) {
+                            if(ds.child("user").getValue(String.class).equalsIgnoreCase(userID.trim())){
+                                if(ds.child("favourite").getValue(String.class).equalsIgnoreCase(address.trim())){
+                                    isFavourite.put(address,true);
+                                }
+//                                Log.i("TAG", "onDataChange: "+ds.child("favourite").getValue(String.class));
+                            }
+
+                        }
+
+                        Log.i("TAG", "onDataChange: "+isFavourite);
+
+                        if(isFavourite.get(address) != null && isFavourite.get(address)){
+                            favoriteImg.setImageResource(R.drawable.ic_baseline_favorite_24);
+                        }else{
+                            favoriteImg.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setAndStoreFavourite(String add) {
+        try {
+            DatabaseReference fav = db.getReference().child("Favourite").push();
+            Map<String,String> _favDetail = new HashMap<>();
+
+            if( isFavourite.get(add) == null){
+                _favDetail.put("user",userID);
+                _favDetail.put("favourite",add);
+                fav.setValue(_favDetail);
+            }else{
+                if(!isFavourite.get(add)){
+                    _favDetail.put("user",userID);
+                    _favDetail.put("favourite",add);
+                    fav.setValue(_favDetail);
+                }else{
+                    DatabaseReference favourite = db.getReference().child("Favourite");
+                    favourite.child("favourite").child(add).removeValue();
+                }
+
+            }
+
+            showIfFavourite(add);
+//            isFavourite = !isFavourite;
+
+
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -275,12 +367,13 @@ public class MapsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        Places.initialize(getContext().getApplicationContext(),"AIzaSyAu63qsym8VNv-4qGwyPjNXP3J_fMJyzJs");
         final TextView greetingText =  view.findViewById(R.id.greetings);
         final ImageView imageView = view.findViewById(R.id.iconGreeting);
         placesName = view.findViewById(R.id.placeName);
         listView = view.findViewById(R.id.newsList);
         noNews = view.findViewById(R.id.noNews);
+        favoriteImg = view.findViewById(R.id.iconFavourite);
+        userID = sharedPreferences.getString("userID","Boro Service Provider");
         placesLayout = view.findViewById(R.id.places);
         weatherNews = view.findViewById(R.id.weatherInfo);
         username = sharedPreferences.getString("username","Boro Service Provider");
@@ -354,6 +447,7 @@ public class MapsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.i("TAG", "onActivityResult: "+resultCode);
         if(requestCode == 100 && resultCode == RESULT_OK){
             Place place = Autocomplete.getPlaceFromIntent(data);
 
